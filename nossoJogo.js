@@ -1,12 +1,50 @@
-/**
- * EXEMPLO DE UTILIZAÇÃO DA 'comprarCarta'
- * 
- * 
-    const carta = comprarCarta(); // Sorteia uma carta. Por exemplo, o rei de ouros
-    
-    console.log(carta.texto) // imprime o texto da carta. Exemplo: "K♦️" (indica "K" de ouros)
-    console.log(carta.valor) // imprime o valor da carta (um número). Exemplo: 10 (dado que "K" vale 10)
- * 
- * 
- * 
- */
+ // EXEMPLO DE UTILIZAÇÃO DA 'comprarCarta'
+console.log ("Boas-vindas ao jogo de BlackJack!")
+  
+if(confirm("Quer iniciar uma rodada?")){
+   comecarJogo()
+}else{
+   console.log ("O jogo acabou")
+}
+
+function usuario (){
+   let soma = 0
+   let nomeCartas = ""
+   while(soma === 22 || soma === 0){
+      for (let i = 0; i<2; i++){
+         const carta = comprarCarta()
+         soma += carta.valor
+         nomeCartas += `${carta.texto} `
+      }
+   }
+   console.log (`Usuário - cartas: ${nomeCartas} - ${soma}`)
+   return soma
+}
+
+function computador (){
+   let soma = 0
+   let nomeCartas = ""
+   while(soma === 22 || soma === 0){
+      for (let i = 0; i<2; i++){
+         const carta = comprarCarta()
+         soma += carta.valor
+         nomeCartas += `${carta.texto} `
+      }
+   }
+   console.log (`Computador - cartas: ${nomeCartas} - ${soma}`)
+   return soma
+}
+  
+function comecarJogo() {
+   const resultUsuario = usuario()
+   const resultComputador = computador()
+
+   if (((resultUsuario > resultComputador) || (resultComputador > 21)) && (resultUsuario <= 21)) {
+      console.log("Você ganhou!")
+   } else
+      if (((resultUsuario < resultComputador) || (resultUsuario > 21)) && (resultComputador <= 21)) {
+         console.log("O computador ganhou!")
+      } else
+         console.log("Vocês empataram.")
+
+}
